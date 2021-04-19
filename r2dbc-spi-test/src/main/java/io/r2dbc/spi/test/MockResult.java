@@ -19,13 +19,15 @@ package io.r2dbc.spi.test;
 import io.r2dbc.spi.Result;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
+import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public final class MockResult implements Result {
@@ -76,6 +78,17 @@ public final class MockResult implements Result {
             ", rows=" + this.rows +
             ", rowsUpdated=" + this.rowsUpdated +
             '}';
+    }
+
+    // TODO: TO BE DONE AFTER API STABILITY
+    @Override
+    public Result filter(Predicate<Segment> filter) {
+        return null;
+    }
+
+    @Override
+    public <T> Publisher<T> flatMap(Function<Segment, ? extends Publisher<T>> mappingFunction) {
+        return null;
     }
 
     public static final class Builder {
